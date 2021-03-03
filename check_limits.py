@@ -5,13 +5,13 @@ bms_attribute_limits = {
         }
 
 
-def check_attributes_limit(bms_attribute):
+def bms_attributes_check(bms_attribute):
     offLimits = []
     for bms_name,bms_value in bms_attribute.items() :
-        check_attributes_limit(bms_name,bms_value,offLimits)       
+        check_attribute_limit(bms_name,bms_value,offLimits)       
     return offLimits
 
-def bms_attributes_check(bms_name,bms_value,offLimits):
+def check_attribute_limit(bms_name,bms_value,offLimits):
      if (bms_value < bms_attribute_limits[bms_name]['min']) or (bms_value > bms_attribute_limits[bms_name]['max']):
             offLimits.append(bms_name)
 
@@ -30,4 +30,4 @@ if __name__ == '__main__':
   assert(battery_is_ok({'temperature': 50,'soc': 85, 'charge_rate': 0}) is False)  #all attributes off limit
   assert(battery_is_ok({'temperature': 100,'soc': 30, 'charge_rate': 0.5}) is False) #temp off limit
   assert(battery_is_ok({'temperature': 25,'soc': 10, 'charge_rate': 0.5}) is False) #SOC off limit
-  assert(battery_is_ok({'temperature': 25,'soc': 70, 'charge_rate': 1}) is False) #charge off limit    
+  assert(battery_is_ok({'temperature': 25,'soc': 70, 'charge_rate': 1}) is False) #charge off limit     
