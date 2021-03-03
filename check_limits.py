@@ -8,17 +8,17 @@ bms_attribute_limits = {
 def check_attributes_limit(bms_attribute):
     offLimits = []
     for bms_name,bms_value in bms_attribute.items() :
-        compare_parameter_values(bms_name,bms_value,offLimits)       
+        check_attributes_limit(bms_name,bms_value,offLimits)       
     return offLimits
 
-def compare_parameter_values(bms_name,bms_value,offLimits):
+def bms_attributes_check(bms_name,bms_value,offLimits):
      if (bms_value < bms_attribute_limits[bms_name]['min']) or (bms_value > bms_attribute_limits[bms_name]['max']):
             offLimits.append(bms_name)
 
 
 def battery_is_ok(bms_attribute):
-    bms_attributes_check = check_attributes_limit(bms_attribute)
-    if len(bms_attributes_check) == 0:
+    bms_check = bms_attributes_check(bms_attribute)
+    if len(bms_check) == 0:
         print("Battery is ok")
         return True
     else :
