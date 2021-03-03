@@ -32,7 +32,7 @@ def battery_is_ok(bms_attribute):
     
 if __name__ == '__main__':
   assert(battery_is_ok({'temperature': 25,'Soc': 70, 'Charge_rate': 0.7}) is True)  #all attributes fine
-  assert(battery_is_ok({'Temperature': 50,'soc': 85, 'Charge_rate': 0}) is False)  #all attributes off limit
+  assert(battery_is_ok({'TEMPERATURE': 50,'soc': 85, 'Charge_rate': 0}) is False)  #all attributes off limit
   assert(battery_is_ok({'Temperature': 100,'SOC': 30, 'Charge_rate': 0.5}) is False) #temp off limit
   assert(battery_is_ok({'Temperature': 25,'Soc': 10, 'charge_rate': 0.5}) is False) #SOC off limit
   assert(battery_is_ok({'Temperature': 25,'Soc': 70, 'CHARGE_RATE': 1}) is False) #charge off limit                
