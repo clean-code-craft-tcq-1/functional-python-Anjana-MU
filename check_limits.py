@@ -5,7 +5,7 @@ bms_attribute_limits = {
         }
 
 
-def bms_attributes_check(bms_attribute):
+def check_attribute_stable(bms_attribute):
     offLimits = []
     for bms_name,bms_value in bms_attribute.items() :
         check_attribute_limit(bms_name,bms_value,offLimits)       
@@ -17,7 +17,7 @@ def check_attribute_limit(bms_name,bms_value,offLimits):
 
 
 def battery_is_ok(bms_attribute):
-    bms_check = bms_attributes_check(bms_attribute)
+    bms_check = check_attribute_stable(bms_attribute)
     if len(bms_check) == 0:
         print("Battery is ok")
         return True
@@ -30,4 +30,4 @@ if __name__ == '__main__':
   assert(battery_is_ok({'temperature': 50,'soc': 85, 'charge_rate': 0}) is False)  #all attributes off limit
   assert(battery_is_ok({'temperature': 100,'soc': 30, 'charge_rate': 0.5}) is False) #temp off limit
   assert(battery_is_ok({'temperature': 25,'soc': 10, 'charge_rate': 0.5}) is False) #SOC off limit
-  assert(battery_is_ok({'temperature': 25,'soc': 70, 'charge_rate': 1}) is False) #charge off limit     
+  assert(battery_is_ok({'temperature': 25,'soc': 70, 'charge_rate': 1}) is False) #charge off limit         
