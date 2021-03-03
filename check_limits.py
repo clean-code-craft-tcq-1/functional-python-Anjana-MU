@@ -22,7 +22,7 @@ def battery_is_ok(bms_attribute):
         print("Battery is ok")
         return True
     else :
-        print("Battery is not ok")
+        print("Abnormal Vitals.Battery is not ok")
         return False
     
 if __name__ == '__main__':
