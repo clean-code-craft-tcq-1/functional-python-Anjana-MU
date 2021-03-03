@@ -1,9 +1,10 @@
+from report_vitals import report_normal_vitals,report_abnormal_vitals
+
 bms_attribute_limits = {
      'temperature': {'min': 0, 'max': 45},
      'soc': {'min': 20, 'max': 80},
      'charge_rate': {'min': 0,'max': 0.8}
         }
-
 
 def check_attribute_stable(bms_attribute):
     offLimits = []
@@ -17,12 +18,12 @@ def check_attribute_limit(bms_name,bms_value,offLimits):
 
 
 def battery_is_ok(bms_attribute):
-    bms_check = check_attribute_stable(bms_attribute)
-    if len(bms_check) == 0:
-        print("Battery is ok")
+    bms_vitals = check_attribute_stable(bms_attribute)
+    if len(bms_vitals) == 0:
+        report_normal_vitals()
         return True
     else :
-        print("Abnormal Vitals.Battery is not ok")
+        report_abnormal_vitals(bms_vitals)
         return False
     
 if __name__ == '__main__':
@@ -30,4 +31,4 @@ if __name__ == '__main__':
   assert(battery_is_ok({'temperature': 50,'soc': 85, 'charge_rate': 0}) is False)  #all attributes off limit
   assert(battery_is_ok({'temperature': 100,'soc': 30, 'charge_rate': 0.5}) is False) #temp off limit
   assert(battery_is_ok({'temperature': 25,'soc': 10, 'charge_rate': 0.5}) is False) #SOC off limit
-  assert(battery_is_ok({'temperature': 25,'soc': 70, 'charge_rate': 1}) is False) #charge off limit         
+  assert(battery_is_ok({'temperature': 25,'soc': 70, 'charge_rate': 1}) is False) #charge off limit            
